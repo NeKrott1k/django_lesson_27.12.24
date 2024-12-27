@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <button style="margin: 20px 0;" class="btn btn-primary"><a class="nav-link" href="{% url 'book-create' %}">Create Book</a></button>
+{% if not books %}
+    <p>No books found. Create a new book.</p>
+{% else %}
+    <ul class="list-group" style="margin-bottom: 20px;">
+        {% for book in books %}
+            <li style="display: flex; justify-content: space-between;" class="list-group-item">
+                <a class="nav-link" href="#">{{ book.full_name }}</a>
+                <div class="btn-books" style="display: flex; gap: 20px;">
+                    <a href="{% url 'book-update' book.pk %}">Update Book</a>
+                    <a class="link-danger" href="{% url 'book-delete' book.pk %}">Delete Book</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    <p style="max-width: fit-content;">Install <a target="_blank" href="https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh">Dark Reader</a> for best experiense</p>
+{% endblock  %}
